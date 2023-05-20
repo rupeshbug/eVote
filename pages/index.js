@@ -1,8 +1,11 @@
+import HeroSection from "@/components/Home/HeroSection";
+import Navbar from "@/components/Layout/Navbar";
+
 const index = () => {
   return (
     <div>
-      <h1>hello</h1>
-      <p>Rupesh</p>
+      <Navbar />
+      <HeroSection />
     </div>
   );
 };
