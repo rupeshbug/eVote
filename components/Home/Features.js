@@ -19,7 +19,7 @@ const FeatureCard = ({ icon, title, description }) => {
 const Features = () => {
   return (
     <div className="px-10 py-10">
-      <h1 className="text-3xl text-center mb-5 tracking-wide">
+      <h1 className="text-3xl text-center mb-8 tracking-wide">
         Discover the eVote Features
       </h1>
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">

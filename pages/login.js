@@ -1,12 +1,13 @@
 import React from "react";
 import Navbar from "../components/Layout/Navbar";
 import { FcGoogle } from "react-icons/fc";
+import Footer from "@/components/Layout/Footer";
 
 const login = () => {
   return (
     <>
       <Navbar />
-      <div className="mt-5 px-10 flex">
+      <div className="mt-5 mb-5 px-10 py-5 flex">
         <div className="md:w-1/2">
           <img
             className="md:rounded-8px hidden md:block"
@@ -32,6 +33,7 @@ const login = () => {
           </div>
         </div>
       </div>
+      <Footer />
     </>
   );
 };
