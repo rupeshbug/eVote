@@ -1,4 +1,5 @@
 import backgroundImage from "../../public/background.webp";
+import Link from "next/link";
 
 const HeroSection = () => {
   return (
@@ -17,9 +18,11 @@ const HeroSection = () => {
           An online voting platform you can trust.
         </p>
         <div className="text-center md:text-left mb-4">
-          <button className="bg-teal-600 hover:bg-teal-700 rounded-lg px-5 py-2 text-xl">
-            Create a poll
-          </button>
+          <Link href="/login">
+            <button className="bg-teal-600 hover:bg-teal-700 rounded-lg px-5 py-2 text-xl">
+              Create a poll
+            </button>
+          </Link>
         </div>
       </div>
       <div className="w-full md:w-1/2 px-10 order-1 md:order-2">

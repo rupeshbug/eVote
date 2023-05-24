@@ -1,3 +1,5 @@
+import Link from "next/link";
+
 const Navbar = () => {
   return (
     <nav
@@ -13,10 +15,15 @@ const Navbar = () => {
         />
       </div>
       <ul className="flex justify-around w-1/2 text-white">
-        <li>Home</li>
-        <li>About Us</li>
-        <li>Signup</li>
-        <li>Create Event</li>
+        <Link href="/">
+          <li>Home</li>
+        </Link>
+        <Link href="/about">
+          <li>About Us</li>
+        </Link>
+        <Link href="/login">
+          <li>Create A Poll</li>
+        </Link>
       </ul>
     </nav>
   );

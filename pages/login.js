@@ -15,7 +15,7 @@ const login = () => {
             style={{ borderRadius: "8px" }}
           />
         </div>
-        <div className="text-left px-5 flex flex-col align-center justify-center w-full mt-10 md:mt-0">
+        <div className="text-left md:ml-5 px-5 py-5 flex flex-col align-center justify-center w-full mt-10 md:mt-0 shadow-lg sm:w-full md:w-1/2">
           <h1 className="text-4xl mb-5 text-center tracking-wide">eVote</h1>
           <p className="text-xl text-center text-slate-800 mb-4 tracking-wide">
             Create customized polls to suit your specific needs. Vote securely
