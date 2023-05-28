@@ -11,7 +11,6 @@ const login = () => {
 
   useEffect(() => {
     if (session) {
-      console.log("here");
       router.push("/eventTimeline");
     }
   }, [session]);
