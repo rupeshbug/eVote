@@ -25,6 +25,7 @@ ChartJS.register(
 
 export const options = {
   responsive: true,
+  indexAxis: "y",
   plugins: {
     legend: {
       position: "top",
