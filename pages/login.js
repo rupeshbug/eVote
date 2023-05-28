@@ -12,7 +12,7 @@ const login = () => {
   useEffect(() => {
     if (session) {
       console.log("here");
-      router.push("/createPoll");
+      router.push("/eventTimeline");
     }
   }, [session]);
 

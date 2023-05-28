@@ -20,7 +20,7 @@ const HeroSection = () => {
         <div className="text-center md:text-left mb-4">
           <Link href="/login">
             <button className="bg-teal-600 hover:bg-teal-700 rounded-lg px-5 py-2 text-xl">
-              Create a poll
+              Go To App
             </button>
           </Link>
         </div>

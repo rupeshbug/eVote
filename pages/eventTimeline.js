@@ -1,9 +1,9 @@
+import Navbar from "@/components/Layout/Navbar";
 import React, { useEffect } from "react";
 import { useSession } from "next-auth/react";
 import { useRouter } from "next/router";
-import Navbar from "@/components/Layout/Navbar";
 
-const CreatePoll = () => {
+const EventTimelin = () => {
   const { data: session } = useSession();
   const router = useRouter();
 
@@ -14,11 +14,11 @@ const CreatePoll = () => {
   }, [session]);
 
   return (
-    <>
+    <div>
       <Navbar />
-      <h2>Create Poll</h2>
-    </>
+      <h1>Event Timeline</h1>
+    </div>
   );
 };
 
-export default CreatePoll;
+export default EventTimelin;

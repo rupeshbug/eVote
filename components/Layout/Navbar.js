@@ -1,8 +1,11 @@
 import Link from "next/link";
 import { useState } from "react";
 import { AiOutlineMenu, AiOutlineClose } from "react-icons/ai";
+import { useSession, signIn, signOut } from "next-auth/react";
+import { FcGoogle } from "react-icons/fc";
 
 const Navbar = () => {
+  const { data: session } = useSession();
   const [isMenuOpen, setMenuOpen] = useState(false);
 
   const handleMenuToggle = () => {
@@ -11,7 +14,7 @@ const Navbar = () => {
 
   return (
     <nav className="py-2 px-10" style={{ backgroundColor: "#161635" }}>
-      <div >
+      <div>
         <div className="flex items-center justify-between h-16">
           <div className="flex-shrink-0">
             <Link href="/">
@@ -35,11 +38,30 @@ const Navbar = () => {
                   About Us
                 </div>
               </Link>
-              <Link href="/login">
-                <div className="text-white hover:bg-gray-700 px-3 py-2 rounded-md text-lg font-medium cursor-pointer">
-                  Create A Poll
-                </div>
-              </Link>
+              {session ? (
+                <Link href="/createPoll">
+                  <div className="text-white hover:bg-gray-700 px-3 py-2 rounded-md text-lg font-medium cursor-pointer">
+                    Create A Poll
+                  </div>
+                </Link>
+              ) : (
+                <button
+                  onClick={() => signIn()}
+                  className="flex items-center justify-center max-w-xs px-4 py-3 rounded-lg border-2 w-60"
+                  style={{ color: "white" }}
+                >
+                  Sign In
+                </button>
+              )}
+              {session ? (
+                <button
+                  onClick={() => signOut()}
+                  className="flex items-center justify-center max-w-xs px-4 py-3 rounded-lg border-2 w-60"
+                  style={{ color: "white" }}
+                >
+                  Sign Out
+                </button>
+              ) : null}
             </div>
           </div>
           <div className="flex md:hidden">
@@ -71,11 +93,33 @@ const Navbar = () => {
               About Us
             </div>
           </Link>
-          <Link href="/login">
-            <div className="text-white hover:bg-gray-700 block px-3 py-2 rounded-md text-lg font-medium cursor-pointer">
-              Create A Poll
+          {session ? (
+            <Link href="/createPoll">
+              <div className="text-white hover:bg-gray-700 block px-3 py-2 rounded-md text-lg font-medium cursor-pointer">
+                Create A Poll
+              </div>
+            </Link>
+          ) : (
+            <div className="mx-auto mt-5">
+              <button
+                onClick={() => signIn({})}
+                className="flex items-center justify-center max-w-xs px-4 py-3 rounded-lg border-2 w-60"
+                style={{ color: "white" }}
+              >
+                <FcGoogle className="w-5 h-5 mr-2" />
+                Sign In
+              </button>
             </div>
-          </Link>
+          )}
+          {session ? (
+            <button
+              onClick={() => signOut()}
+              className="flex items-center justify-center max-w-xs px-4 py-3 rounded-lg border-2 w-60"
+              style={{ color: "white" }}
+            >
+              Sign Out
+            </button>
+          ) : null}
         </div>
       </div>
     </nav>
