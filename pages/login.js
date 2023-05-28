@@ -1,11 +1,20 @@
-import React from "react";
+import React, { useEffect } from "react";
 import Navbar from "../components/Layout/Navbar";
 import { FcGoogle } from "react-icons/fc";
 import Footer from "@/components/Layout/Footer";
 import { useSession, signIn, signOut } from "next-auth/react";
+import { useRouter } from "next/router";
 
 const login = () => {
   const { data: session } = useSession();
+  const router = useRouter();
+
+  useEffect(() => {
+    if (session) {
+      console.log("here");
+      router.push("/createPoll");
+    }
+  }, [session]);
 
   if (session) {
     return (
@@ -66,7 +75,7 @@ const login = () => {
                 style={{ color: "#737373", borderColor: "#ccc" }}
               >
                 <FcGoogle className="w-5 h-5 mr-2" />
-                Sign Up with Google
+                Sign In with Google
               </button>
             </div>
           </div>

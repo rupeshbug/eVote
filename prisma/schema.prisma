@@ -1,0 +1,42 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model Event {
+  id           String         @id @default(cuid())
+  title        String
+  content      String?
+  published    Boolean        @default(false)
+  author       String
+  EventVote    EventVote?     @relation(fields: [eventVoteId], references: [id])
+  eventVoteId  String?
+  eventOptions EventOptions[]
+
+  @@map("options")
+}
+
+model EventOptions {
+  id      String  @id @default(cuid())
+  title   String
+  Event   Event?  @relation(fields: [eventId], references: [id])
+  eventId String?
+}
+
+model EventVote {
+  id        String   @id @default(cuid())
+  name      String?
+  email     String?  @unique
+  createdAt DateTime @default(now()) @map(name: "created_at")
+  updatedAt DateTime @updatedAt @map(name: "updated_at")
+  posts     Event[]
+
+  @@map(name: "eventVotes")
+}
