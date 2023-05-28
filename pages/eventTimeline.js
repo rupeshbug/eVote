@@ -17,6 +17,7 @@ const EventTimelin = () => {
     <div>
       <Navbar />
       <h1>Event Timeline</h1>
+      <p1>Create list of vertical bar charts here</p1>
     </div>
   );
 };
