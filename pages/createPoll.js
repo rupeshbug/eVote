@@ -17,7 +17,7 @@ const CreatePoll = () => {
     <>
       <Navbar />
       <h2 className="text-center text-4xl my-10">Create Poll</h2>
-      <div className="flex justify-center ">
+      <div className="flex justify-center px-10">
         <div class="w-full md:w-2/5">
           <form class="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4">
             <div class="mb-4">

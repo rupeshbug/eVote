@@ -14,11 +14,13 @@ const EventTimelin = () => {
   }, [session]);
 
   return (
-    <div>
+    <>
       <Navbar />
-      <h1>Event Timeline</h1>
-      <p1>Create list of vertical bar charts here</p1>
-    </div>
+      <div className="px-10">
+        <h1 className="text-4xl text-center my-10">Event Timeline</h1>
+        <p1>Create list of vertical bar charts here</p1>
+      </div>
+    </>
   );
 };
 
