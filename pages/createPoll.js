@@ -2,10 +2,18 @@ import React, { useEffect } from "react";
 import { useSession } from "next-auth/react";
 import { useRouter } from "next/router";
 import Navbar from "@/components/Layout/Navbar";
+import { useMutation } from "@tanstack/react-query";
+import axios from "axios";
 
 const CreatePoll = () => {
   const { data: session } = useSession();
   const router = useRouter();
+
+  const mutation = useMutation({
+    mutationFn: (newPoll) => {
+      return axios.post("/api/poll/createPoll", newPoll);
+    },
+  });
 
   useEffect(() => {
     if (!session) {
@@ -13,21 +21,31 @@ const CreatePoll = () => {
     }
   }, [session]);
 
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    const title = e.target.title.value;
+    mutation.mutate({ title });
+  };
+
   return (
     <>
       <Navbar />
       <h2 className="text-center text-4xl my-10">Create Poll</h2>
       <div className="flex justify-center px-10">
         <div class="w-full md:w-2/5">
-          <form class="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4">
+          <form
+            class="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4"
+            onSubmit={handleSubmit}
+          >
             <div class="mb-4">
               <label
-                class="block text-gray-700 text-sm font-bold mb-2"
-                for="eventTitle"
+                className="block text-gray-700 text-sm font-bold mb-2"
+                htmlFor="eventTitle"
               >
                 Give Event Title
               </label>
               <input
+                name="title"
                 class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
                 id="eventTitle"
                 type="text"
@@ -62,7 +80,7 @@ const CreatePoll = () => {
             <div class="flex items-center justify-between">
               <button
                 class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
-                type="button"
+                type="submit"
               >
                 Create Event
               </button>
