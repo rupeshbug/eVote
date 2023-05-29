@@ -14,7 +14,7 @@ model Event {
   id           String         @id @default(cuid())
   title        String
   content      String?
-  published    Boolean        @default(false)
+  published    Boolean        @default(true)
   author       String
   EventVote    EventVote?     @relation(fields: [eventVoteId], references: [id])
   eventVoteId  String?

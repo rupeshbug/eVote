@@ -24,7 +24,8 @@ const CreatePoll = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
     const title = e.target.title.value;
-    mutation.mutate({ title });
+    const content = e.target.content.value;
+    mutation.mutate({ title, content });
   };
 
   return (
@@ -65,6 +66,7 @@ const CreatePoll = () => {
                 id="description"
                 type="text"
                 placeholder="Give description about event or topic"
+                name="content"
               />
             </div>
             <div class="mb-6">
