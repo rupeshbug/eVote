@@ -25,7 +25,12 @@ const CreatePoll = () => {
     e.preventDefault();
     const title = e.target.title.value;
     const content = e.target.content.value;
-    mutation.mutate({ title, content });
+    const option1 = e.target.option_1.value;
+    const option2 = e.target.option_2.value;
+    const option3 = e.target.option_3.value;
+    const option4 = e.target.option_4.value;
+
+    mutation.mutate({ title, content, option1, option2, option3, option4 });
   };
 
   return (
@@ -63,7 +68,6 @@ const CreatePoll = () => {
               <textarea
                 rows={4}
                 class="shadow appearance-none border  rounded w-full py-2 px-3 text-gray-700 mb-3 leading-tight focus:outline-none focus:shadow-outline"
-                id="description"
                 type="text"
                 placeholder="Give description about event or topic"
                 name="content"
@@ -77,6 +81,25 @@ const CreatePoll = () => {
                 class="shadow appearance-none border  rounded w-full py-2 px-3 text-gray-700 mb-3 leading-tight focus:outline-none focus:shadow-outline"
                 type="text"
                 placeholder="Option 1"
+                name="option_1"
+              />
+              <input
+                class="shadow appearance-none border  rounded w-full py-2 px-3 text-gray-700 mb-3 leading-tight focus:outline-none focus:shadow-outline"
+                type="text"
+                placeholder="Option 2"
+                name="option_2"
+              />
+              <input
+                class="shadow appearance-none border  rounded w-full py-2 px-3 text-gray-700 mb-3 leading-tight focus:outline-none focus:shadow-outline"
+                type="text"
+                placeholder="Option 3"
+                name="option_3"
+              />
+              <input
+                class="shadow appearance-none border  rounded w-full py-2 px-3 text-gray-700 mb-3 leading-tight focus:outline-none focus:shadow-outline"
+                type="text"
+                placeholder="Option 4"
+                name="option_4"
               />
             </div>
             <div class="flex items-center justify-between">
