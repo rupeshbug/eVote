@@ -8,7 +8,7 @@ export default async function handler(req, res) {
       data: {
         title: req.body.title,
         content: req.body.content,
-        author: "random",
+        author: req.body.author || "random",
       },
     });
 

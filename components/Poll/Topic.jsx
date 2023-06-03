@@ -19,8 +19,6 @@ const Topic = ({ poll }) => {
     },
   };
 
-  //   const labels = ["Kp Oli", "Puti Kamal Dahal", "Shere Bahadur", "Makune"];
-
   const labels = poll?.eventOptions?.map((eventOption) => eventOption.title);
 
   const data = {
@@ -39,7 +37,7 @@ const Topic = ({ poll }) => {
   return (
     <div className="px-10 flex justify-center my-10">
       <div className="w-full md:w-1/2">
-        <Bar options={options} data={data} />
+        <Bar options={options} data={data} onClick={(e) => console.log(e)} />
       </div>
     </div>
   );

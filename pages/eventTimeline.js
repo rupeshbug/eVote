@@ -29,7 +29,7 @@ const EventTimelin = () => {
   const router = useRouter();
 
   const { isLoading, data: polls } = useQuery({
-    queryKey: ["repoData"],
+    queryKey: ["polls"],
     queryFn: () => axios.get("/api/poll/getPoll"),
   });
 

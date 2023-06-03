@@ -2,12 +2,13 @@ import React, { useEffect } from "react";
 import { useSession } from "next-auth/react";
 import { useRouter } from "next/router";
 import Navbar from "@/components/Layout/Navbar";
-import { useMutation } from "@tanstack/react-query";
+import { useMutation, useQueryClient } from "@tanstack/react-query";
 import axios from "axios";
 
 const CreatePoll = () => {
   const { data: session } = useSession();
   const router = useRouter();
+  const queryClient = useQueryClient();
 
   const mutation = useMutation({
     mutationFn: (newPoll) => {
@@ -15,11 +16,11 @@ const CreatePoll = () => {
     },
   });
 
-  useEffect(() => {
-    if (!session) {
-      router.push("/");
-    }
-  }, [session]);
+  // useEffect(() => {
+  //   if (!session) {
+  //     router.push("/");
+  //   }
+  // }, [session]);
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -29,8 +30,26 @@ const CreatePoll = () => {
     const option2 = e.target.option_2.value;
     const option3 = e.target.option_3.value;
     const option4 = e.target.option_4.value;
+    const author = session.user.email;
 
-    mutation.mutate({ title, content, option1, option2, option3, option4 });
+    mutation.mutate(
+      {
+        title,
+        content,
+        option1,
+        option2,
+        option3,
+        option4,
+        author,
+      },
+      {
+        onSuccess: () => {
+          queryClient.invalidateQueries({ queryKey: ["polls"] });
+        },
+      }
+    );
+
+    router.push("/eventTimeline");
   };
 
   return (
