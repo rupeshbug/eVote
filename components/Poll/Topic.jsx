@@ -1,7 +1,21 @@
 import { Bar } from "react-chartjs-2";
 import faker from "faker";
+import { useMutation, useQueryClient } from "@tanstack/react-query";
+import axios from "axios";
+import { useSession } from "next-auth/react";
 
 const Topic = ({ poll }) => {
+  const { data: session } = useSession();
+
+  const mutation = useMutation({
+    mutationFn: (selectedVoteId) => {
+      return axios.post("/api/poll/createVote", selectedVoteId);
+    },
+    onError: (error) => {
+      alert("You have already voted");
+    },
+  });
+
   const options = {
     responsive: true,
     indexAxis: "y",
@@ -22,8 +36,17 @@ const Topic = ({ poll }) => {
         const datasetIndex = elements[0].datasetIndex;
         const index = elements[0].index;
         const value = data.datasets[datasetIndex].data[index];
+        const label = data.labels[index];
 
-        console.log("Clicked bar value:", elements);
+        const selectedVote = poll?.eventOptions.find(
+          (option) => option.title === label
+        );
+
+        mutation.mutate({
+          eventVoteId: selectedVote.id,
+          email: session.user.email,
+          event: selectedVote.eventId,
+        });
       }
     },
   };
@@ -41,12 +64,10 @@ const Topic = ({ poll }) => {
     ],
   };
 
-  console.log("poll", poll);
-
   return (
     <div className="px-10 flex justify-center my-10">
       <div className="w-full md:w-1/2">
-        <Bar options={options} data={data} onClick={(e) => console.log(e)} />
+        <Bar options={options} data={data} />
       </div>
     </div>
   );

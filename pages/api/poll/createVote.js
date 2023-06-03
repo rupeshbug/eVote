@@ -2,21 +2,24 @@ import { PrismaClient } from "@prisma/client";
 
 export default async function handler(req, res) {
   if (req.method === "POST") {
-    // Process a POST request
     const prisma = new PrismaClient();
-    const ifVoteExists = await prisma.eventVote.findMany({
+    const ifVoteExists = await prisma.eventVote.findFirst({
       where: {
         email: req.body.email,
+        event: req.body.event,
       },
       include: {
         event: true,
       },
     });
-    console.log("ifVoteExists", ifVoteExists);
+
+    if (ifVoteExists) {
+      return res.status(400).json({ msg: "You already voted" });
+    }
     const newVote = await prisma.eventVote.create({
       data: {
         email: req.body.email,
-        event: req.body.event,
+        eventOptionId: req.body.eventVoteId,
       },
     });
 

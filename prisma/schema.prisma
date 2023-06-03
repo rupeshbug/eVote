@@ -24,19 +24,22 @@ model Event {
 }
 
 model EventOptions {
-  id      String  @id @default(cuid())
-  title   String
-  Event   Event?  @relation(fields: [eventId], references: [id])
-  eventId String?
+  id        String      @id @default(cuid())
+  title     String
+  Event     Event?      @relation(fields: [eventId], references: [id])
+  eventId   String?
+  EventVote EventVote[]
 }
 
 model EventVote {
-  id        String   @id @default(cuid())
-  name      String?
-  email     String?  @unique
-  createdAt DateTime @default(now()) @map(name: "created_at")
-  updatedAt DateTime @updatedAt @map(name: "updated_at")
-  event     Event[]
+  id            String       @id @default(cuid())
+  name          String?
+  email         String?
+  createdAt     DateTime     @default(now()) @map(name: "created_at")
+  updatedAt     DateTime     @updatedAt @map(name: "updated_at")
+  event         Event[]
+  eventOption   EventOptions @relation(fields: [eventOptionId], references: [id])
+  eventOptionId String
 
   @@map(name: "eventVotes")
 }

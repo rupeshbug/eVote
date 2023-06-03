@@ -10,11 +10,18 @@ const CreatePoll = () => {
   const router = useRouter();
   const queryClient = useQueryClient();
 
-  const mutation = useMutation({
-    mutationFn: (newPoll) => {
-      return axios.post("/api/poll/createPoll", newPoll);
+  const mutation = useMutation(
+    {
+      mutationFn: (newPoll) => {
+        return axios.post("/api/poll/createPoll", newPoll);
+      },
     },
-  });
+    {
+      onSuccess: () => {
+        queryClient.invalidateQueries({ queryKey: ["polls"] });
+      },
+    }
+  );
 
   // useEffect(() => {
   //   if (!session) {
@@ -32,22 +39,15 @@ const CreatePoll = () => {
     const option4 = e.target.option_4.value;
     const author = session.user.email;
 
-    mutation.mutate(
-      {
-        title,
-        content,
-        option1,
-        option2,
-        option3,
-        option4,
-        author,
-      },
-      {
-        onSuccess: () => {
-          queryClient.invalidateQueries({ queryKey: ["polls"] });
-        },
-      }
-    );
+    mutation.mutate({
+      title,
+      content,
+      option1,
+      option2,
+      option3,
+      option4,
+      author,
+    });
 
     router.push("/eventTimeline");
   };
