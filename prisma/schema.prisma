@@ -36,7 +36,7 @@ model EventVote {
   email     String?  @unique
   createdAt DateTime @default(now()) @map(name: "created_at")
   updatedAt DateTime @updatedAt @map(name: "updated_at")
-  posts     Event[]
+  event     Event[]
 
   @@map(name: "eventVotes")
 }

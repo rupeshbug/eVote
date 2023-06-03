@@ -17,6 +17,15 @@ const Topic = ({ poll }) => {
         },
       },
     },
+    onClick: (event, elements) => {
+      if (elements && elements.length > 0) {
+        const datasetIndex = elements[0].datasetIndex;
+        const index = elements[0].index;
+        const value = data.datasets[datasetIndex].data[index];
+
+        console.log("Clicked bar value:", elements);
+      }
+    },
   };
 
   const labels = poll?.eventOptions?.map((eventOption) => eventOption.title);
