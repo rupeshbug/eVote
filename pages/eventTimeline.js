@@ -15,6 +15,7 @@ import { Bar } from "react-chartjs-2";
 import faker from "faker";
 import { useQuery } from "@tanstack/react-query";
 import axios from "axios";
+import Topic from "@/components/Poll/Topic";
 
 ChartJS.register(
   CategoryScale,
@@ -34,11 +35,11 @@ const EventTimelin = () => {
     queryFn: () => axios.get("/api/poll/getPoll"),
   });
 
-  useEffect(() => {
-    if (!session) {
-      router.push("/");
-    }
-  }, [session]);
+  // useEffect(() => {
+  //   if (!session) {
+  //     router.push("/");
+  //   }
+  // }, [session]);
 
   const options = {
     responsive: true,
@@ -59,7 +60,9 @@ const EventTimelin = () => {
 
   // const labels = ["Kp Oli", "Puti Kamal Dahal", "Shere Bahadur", "Makune"];
 
-  const labels = polls?.data?.polls.map((poll) => poll.title);
+  const labels = polls?.data.eventOptions?.map(
+    (eventOption) => eventOption.title
+  );
 
   const data = {
     labels,
@@ -71,8 +74,6 @@ const EventTimelin = () => {
       },
     ],
   };
-
-  console.log("data", polls?.data.polls[0]);
 
   return (
     <>
@@ -89,11 +90,7 @@ const EventTimelin = () => {
           <span class="sr-only">Loading...</span>
         </div>
       ) : (
-        <div className="px-10 flex justify-center">
-          <div className="w-full md:w-1/2">
-            <Bar options={options} data={data} />
-          </div>
-        </div>
+        polls?.data.polls.map((poll, i) => <Topic poll={poll} key={i} />)
       )}
     </>
   );
