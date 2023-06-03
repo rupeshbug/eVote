@@ -11,8 +11,6 @@ import {
   Tooltip,
   Legend,
 } from "chart.js";
-import { Bar } from "react-chartjs-2";
-import faker from "faker";
 import { useQuery } from "@tanstack/react-query";
 import axios from "axios";
 import Topic from "@/components/Poll/Topic";
@@ -40,40 +38,6 @@ const EventTimelin = () => {
   //     router.push("/");
   //   }
   // }, [session]);
-
-  const options = {
-    responsive: true,
-    indexAxis: "y",
-    plugins: {
-      legend: {
-        position: "top",
-      },
-      title: {
-        display: true,
-        text: "Who is worst among them the PMs of last decade in Nepal?",
-        font: {
-          size: 20,
-        },
-      },
-    },
-  };
-
-  // const labels = ["Kp Oli", "Puti Kamal Dahal", "Shere Bahadur", "Makune"];
-
-  const labels = polls?.data.eventOptions?.map(
-    (eventOption) => eventOption.title
-  );
-
-  const data = {
-    labels,
-    datasets: [
-      {
-        label: "",
-        data: labels?.map(() => faker.datatype.number({ min: 0, max: 1000 })),
-        backgroundColor: "rgba(53, 162, 235, 0.5)",
-      },
-    ],
-  };
 
   return (
     <>
