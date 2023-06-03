@@ -8,8 +8,8 @@ const Topic = ({ poll }) => {
   const { data: session } = useSession();
 
   const mutation = useMutation({
-    mutationFn: (selectedVoteId) => {
-      return axios.post("/api/poll/createVote", selectedVoteId);
+    mutationFn: (vote) => {
+      return axios.post("/api/poll/createVote", vote);
     },
     onError: (error) => {
       alert("You have already voted");

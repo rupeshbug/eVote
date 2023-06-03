@@ -6,23 +6,21 @@ export default async function handler(req, res) {
     const ifVoteExists = await prisma.eventVote.findFirst({
       where: {
         email: req.body.email,
-        event: req.body.event,
-      },
-      include: {
-        event: true,
+        eventId: req.body.event,
       },
     });
 
     if (ifVoteExists) {
       return res.status(400).json({ msg: "You already voted" });
     }
-    const newVote = await prisma.eventVote.create({
+    await prisma.eventVote.create({
       data: {
         email: req.body.email,
         eventOptionId: req.body.eventVoteId,
+        eventId: req.body.event,
       },
     });
 
-    res.json({ newVote });
+    res.status(200).json({ msg: "created successfully" });
   }
 }

@@ -16,7 +16,7 @@ model Event {
   content      String?
   published    Boolean        @default(true)
   author       String
-  EventVote    EventVote?     @relation(fields: [eventVoteId], references: [id])
+  EventVote    EventVote[]
   eventVoteId  String?
   eventOptions EventOptions[]
 
@@ -37,9 +37,10 @@ model EventVote {
   email         String?
   createdAt     DateTime     @default(now()) @map(name: "created_at")
   updatedAt     DateTime     @updatedAt @map(name: "updated_at")
-  event         Event[]
   eventOption   EventOptions @relation(fields: [eventOptionId], references: [id])
   eventOptionId String
+  Event         Event?       @relation(fields: [eventId], references: [id])
+  eventId       String?
 
   @@map(name: "eventVotes")
 }
