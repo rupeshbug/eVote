@@ -53,6 +53,10 @@ const Topic = ({ poll }) => {
 
   const labels = poll?.eventOptions?.map((eventOption) => eventOption.title);
 
+  const getVoteData = () => {
+    //con
+  };
+
   const data = {
     labels,
     datasets: [
@@ -63,6 +67,8 @@ const Topic = ({ poll }) => {
       },
     ],
   };
+
+  console.log(poll);
 
   return (
     <div className="px-10 flex justify-center my-10">
