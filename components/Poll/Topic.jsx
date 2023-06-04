@@ -6,6 +6,7 @@ import { useSession } from "next-auth/react";
 
 const Topic = ({ poll }) => {
   const { data: session } = useSession();
+  const queryClient = useQueryClient();
 
   const mutation = useMutation({
     mutationFn: (vote) => {
@@ -13,6 +14,9 @@ const Topic = ({ poll }) => {
     },
     onError: (error) => {
       alert("You have already voted");
+    },
+    onSuccess: () => {
+      queryClient.invalidateQueries(["polls"]);
     },
   });
 

@@ -2,11 +2,14 @@ import Link from "next/link";
 import { useState } from "react";
 import { AiOutlineMenu, AiOutlineClose } from "react-icons/ai";
 import { useSession, signIn, signOut } from "next-auth/react";
-import { FcGoogle } from "react-icons/fc";
+import { useIsFetching, useIsMutating } from "@tanstack/react-query";
+import Spinner from "./Spinner";
 
 const Navbar = () => {
   const { data: session } = useSession();
   const [isMenuOpen, setMenuOpen] = useState(false);
+  const isFetching = useIsFetching();
+  const isMutating = useIsMutating();
 
   const handleMenuToggle = () => {
     setMenuOpen(!isMenuOpen);
@@ -14,6 +17,27 @@ const Navbar = () => {
 
   return (
     <nav className="py-2 px-10" style={{ backgroundColor: "#161635" }}>
+      {isFetching || isMutating ? (
+        <div
+          style={{
+            height: "98vh",
+            width: "100%",
+            position: "fixed",
+            zIndex: 100,
+          }}
+        >
+          <div
+            style={{
+              position: "absolute",
+              top: "50%",
+              left: "50%",
+              transform: "translateX(-50%)",
+            }}
+          >
+            <Spinner />
+          </div>
+        </div>
+      ) : null}
       <div>
         <div className="flex items-center justify-between h-16">
           <div className="flex-shrink-0">
