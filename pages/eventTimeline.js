@@ -33,11 +33,11 @@ const EventTimelin = () => {
     queryFn: () => axios.get("/api/poll/getPoll"),
   });
 
-  // useEffect(() => {
-  //   if (!session) {
-  //     router.push("/");
-  //   }
-  // }, [session]);
+  useEffect(() => {
+    if (!session) {
+      router.push("/");
+    }
+  }, [session]);
 
   return (
     <>

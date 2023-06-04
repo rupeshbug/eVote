@@ -23,11 +23,11 @@ const CreatePoll = () => {
     }
   );
 
-  // useEffect(() => {
-  //   if (!session) {
-  //     router.push("/");
-  //   }
-  // }, [session]);
+  useEffect(() => {
+    if (!session) {
+      router.push("/");
+    }
+  }, [session]);
 
   const handleSubmit = (e) => {
     e.preventDefault();
