@@ -54,7 +54,14 @@ const Topic = ({ poll }) => {
   const labels = poll?.eventOptions?.map((eventOption) => eventOption.title);
 
   const getVoteData = () => {
-    //con
+    const options = poll?.eventOptions?.map((eventOption) => eventOption);
+    //backend bata aako poll
+    return options?.map((option) => {
+      const votes = poll.EventVote.filter(
+        (item) => item.eventOptionId === option.id
+      );
+      return votes.length;
+    });
   };
 
   const data = {
@@ -62,13 +69,11 @@ const Topic = ({ poll }) => {
     datasets: [
       {
         label: "",
-        data: labels?.map(() => faker.datatype.number({ min: 0, max: 1000 })),
+        data: getVoteData().map((voteCount) => voteCount),
         backgroundColor: "rgba(53, 162, 235, 0.5)",
       },
     ],
   };
-
-  console.log(poll);
 
   return (
     <div className="px-10 flex justify-center my-10">
