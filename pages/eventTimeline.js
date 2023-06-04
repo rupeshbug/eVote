@@ -1,7 +1,5 @@
 import Navbar from "@/components/Layout/Navbar";
-import React, { useEffect } from "react";
-import { useSession } from "next-auth/react";
-import { useRouter } from "next/router";
+import React from "react";
 import {
   Chart as ChartJS,
   CategoryScale,
@@ -25,19 +23,10 @@ ChartJS.register(
 );
 
 const EventTimelin = () => {
-  const { data: session } = useSession();
-  const router = useRouter();
-
-  const { isLoading, data: polls } = useQuery({
+  const { data: polls } = useQuery({
     queryKey: ["polls"],
     queryFn: () => axios.get("/api/poll/getPoll"),
   });
-
-  useEffect(() => {
-    if (!session) {
-      router.push("/");
-    }
-  }, [session]);
 
   return (
     <>

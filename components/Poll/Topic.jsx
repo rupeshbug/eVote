@@ -46,6 +46,10 @@ const Topic = ({ poll }) => {
           (option) => option.title === label
         );
 
+        if (!session) {
+          return;
+        }
+
         mutation.mutate({
           eventVoteId: selectedVote.id,
           email: session.user.email,
