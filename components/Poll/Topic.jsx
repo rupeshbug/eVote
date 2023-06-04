@@ -56,12 +56,20 @@ const Topic = ({ poll }) => {
   const getVoteData = () => {
     const options = poll?.eventOptions?.map((eventOption) => eventOption);
     //backend bata aako poll
-    return options?.map((option) => {
+    const topicVotesCount = options?.map((option) => {
       const votes = poll.EventVote.filter(
         (item) => item.eventOptionId === option.id
       );
       return votes.length;
     });
+    const oneVoteForEachGuarantedFeature = topicVotesCount.map((item) => {
+      if (item === 0) {
+        return 1;
+      } else {
+        return item + 1;
+      }
+    });
+    return oneVoteForEachGuarantedFeature;
   };
 
   const data = {
